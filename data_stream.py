@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-from data_processor import DataProcessor, NumericProcessor, TextProcessor, LogProcessor
+from data_processor import DataProcessor, NumericProcessor
+from data_processor import TextProcessor, LogProcessor
 from typing import Any
 
 
@@ -54,20 +55,35 @@ if __name__ == "__main__":
         "Hello world",
         [3.14, 1, 2.71],
         [
-            {"log_level": "WARNING", "log_message": "Telnet access! Use ssh instead"},
-            {"log_level": "INFO", "log_message": "User wil is connected"}
+            {"log_level": "WARNING",
+             "log_message": "Telnet access! Use ssh instead"},
+            {"log_level": "INFO",
+             "log_message": "User wil is connected"}
         ],
         42,
         ["Hi", "five"]
     ]
 
     print("\nRegistering Numeric Processor")
+    print(f"\nSend first batch of data stream: {batch}")
     stream_engine.register_processor(num_proc)
     stream_engine.process_stream(batch)
     stream_engine.print_processors_stats()
 
     print("\nRegistering other data processors")
+    print("\nSend the batch again")
     stream_engine.register_processor(text_proc)
     stream_engine.register_processor(log_proc)
     stream_engine.process_stream(batch)
+    stream_engine.print_processors_stats()
+
+    print("\nConsume some elements from the data processors:"
+          "Numeric 3, Text 2, Log 1")
+    for _ in range(3):
+        num_proc.output()
+    for _ in range(2):
+        text_proc.output()
+    for _ in range(1):
+        log_proc.output()
+
     stream_engine.print_processors_stats()
