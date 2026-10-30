@@ -101,7 +101,7 @@ class LogProcessor(DataProcessor):
 
 if __name__ == "__main__":
     print("=== Code Nexus Data Processor ===")
-    
+
     num_proc = NumericProcessor()
     text_proc = TextProcessor()
     log_proc = LogProcessor()
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     print("\nTesting Numeric Processor...")
     print(f"Trying to validate input '42': {num_proc.validate(42)}")
     print(f"Trying to validate input 'Hello': {num_proc.validate('Hello')}")
-    
+
     print("\nTest invalid ingestion of string 'foo' without prior validation:")
     try:
         num_proc.ingest("foo")  # type: ignore
