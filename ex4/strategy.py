@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-
 from abc import ABC, abstractmethod
 from typing import Any
 from ex3 import TransformCapability
@@ -34,7 +33,10 @@ class AggressiveStrategy(BattleStrategy):
 
     def act(self, entity: Any) -> None:
         if not self.is_valid(entity):
-            raise InvalidCreatureError(f"Invalid Creature '{entity.name}' for this aggressive strategy")
+            raise InvalidCreatureError(
+                f"Invalid Creature '{entity.name}' "
+                "for this aggressive strategy"
+                )
         print(entity.transform())
         print(entity.attack())
         print(entity.revert())
