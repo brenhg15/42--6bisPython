@@ -2,6 +2,7 @@
 
 from ex3 import FlameFactory, TransformCreatureFactory
 
+
 def test_factory(factory):
     base = factory.create_base()
     evolved = factory.create_evolved()
